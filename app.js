@@ -1,16 +1,15 @@
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const app = express();
 
-app.use("/product", (req, res, next) => {
-  res.send("add product page");
-});
+const adminRoutes = require("./routes/admin");
 
-app.use("/add-product", (req, res, next) => {
-  res.send(
-    '<form action="/product" method="POST"><input type="text" name="title"><button type="submit">ADD PRODUCT</button></form>'
-  );
-});
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 app.use("/", (req, res, next) => {
   res.send("home page");
